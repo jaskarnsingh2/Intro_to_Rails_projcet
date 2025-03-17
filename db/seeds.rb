@@ -2,16 +2,23 @@ require 'csv'
 
 # Seed data from books.csv
 CSV.foreach(Rails.root.join('db', 'books.csv'), headers: true) do |row|
-  # Parse the published date string (it's an array-like string)
-  published_dates = eval(row['Published Date']) rescue nil
-  first_date = published_dates.is_a?(Array) ? published_dates.first : row['Published Date']
-  
-  # Use the publisher from the CSV if available
+  # Attempt to parse the published date string (may contain multiple dates)
+  published_dates = row['Published Date'].split(',').map(&:strip)  # Split by commas to handle multiple dates
+  first_date = published_dates.first  # Take the first date in the array
+
+  # Check if the first date is valid, else set it to nil
+  begin
+    parsed_date = Date.parse(first_date)
+  rescue ArgumentError
+    parsed_date = nil  # If date is invalid, set to nil
+  end
+
+  # Create the book record with parsed date
   Book.create!(
     title: row['Title'],
     authors: row['Author(s)'],
-    published_date: first_date,
-    publisher: row['Publisher'] # Ensure publisher is being passed
+    published_date: parsed_date,
+    publisher: row['Publisher']
   )
 end
 
