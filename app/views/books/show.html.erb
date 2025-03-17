@@ -1,0 +1,13 @@
+<h1><%= @book.title %></h1>
+<p><strong>Authors:</strong> <%= @book.authors %></p>
+<p><strong>Published Date:</strong> <%= @book.published_date %></p>
+<p><strong>Publisher:</strong> <%= @book.publisher %></p>
+
+<h2>Magazines</h2>
+<ul>
+  <% @book.magazines.each do |magazine| %>
+    <li><%= link_to magazine.title, magazine_path(magazine) %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back to Books', root_path %>

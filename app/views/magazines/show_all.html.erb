@@ -1,0 +1,35 @@
+<h1>All Magazines</h1>
+
+<%= form_with(url: magazines_path, method: "get") do %>
+  <%= text_field_tag(:search, params[:search], placeholder: "Search for magazines") %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Published Date</th>
+      <th>Publisher</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @magazines.each do |magazine| %>
+      <tr>
+        <td><%= magazine.title %></td>
+        <td><%= magazine.author %></td>
+        <td><%= magazine.published_date %></td>
+        <td><%= magazine.publisher %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if flash[:notice] %>
+  <div class="alert alert-warning">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<%= paginate @magazines %>

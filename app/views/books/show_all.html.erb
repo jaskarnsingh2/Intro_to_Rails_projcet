@@ -1,0 +1,33 @@
+<h1>All Books</h1>
+
+<%= form_with(url: books_path, method: "get") do %>
+  <%= text_field_tag(:search, params[:search], placeholder: "Search for books") %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Authors</th>
+      <th>Published Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.authors %></td>
+        <td><%= book.published_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if flash[:notice] %>
+  <div class="alert alert-warning">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<%= paginate @books %>

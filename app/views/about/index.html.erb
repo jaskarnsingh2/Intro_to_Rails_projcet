@@ -1,0 +1,12 @@
+<h1>About Us</h1>
+
+<p>In my database, I have two tables namely Books and Magazines. Books Tables has six columns namely "id", "title", "authors", "published_date", "created_at", "updated_at". </p>
+<p>In Magazines table have seven columns named "id", "title", "author", "published_date", "publisher", "created_at", "updated_at", "book_id". Books and Magazines table have one to many associations between them because one book can have many magazines.</p>
+
+<h2>Data Sources</h2>
+
+<ul>
+  <% @data_sources.each do |source| %>
+    <li><strong><%= source[:name] %>:</strong> <%= source[:description] %></li>
+  <% end %>
+</ul>

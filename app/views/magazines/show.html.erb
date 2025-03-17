@@ -1,0 +1,8 @@
+<h1><%= @magazine.title %></h1>
+<p><strong>Author:</strong> <%= @magazine.author %></p>
+<p><strong>Published Date:</strong> <%= @magazine.published_date %></p>
+<p><strong>Publisher:</strong> <%= @magazine.publisher %></p>
+
+<p>
+  <%= link_to 'Back to Book Details', book_path(@magazine.book) %>
+</p>
