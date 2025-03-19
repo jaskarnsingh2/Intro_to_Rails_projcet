@@ -41,9 +41,18 @@ create_table "authors", force: :cascade do |t|
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
 end
+
 create_table "categories", force: :cascade do |t|
   t.string "name"
   t.text "description"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+end
+
+create_table "publishers", force: :cascade do |t|
+  t.string "name"
+  t.text "address"
+  t.text "contact_info"
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
 end
