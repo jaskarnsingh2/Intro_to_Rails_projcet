@@ -1,7 +1,9 @@
 <h1>About Us</h1>
 
-<p>In my database, I have two tables namely Books and Magazines. Books Tables has six columns namely "id", "title", "authors", "published_date", "created_at", "updated_at". </p>
-<p>In Magazines table have seven columns named "id", "title", "author", "published_date", "publisher", "created_at", "updated_at", "book_id". Books and Magazines table have one to many associations between them because one book can have many magazines.</p>
+<p>In my database, I have two tables: <strong>Books</strong> and <strong>Magazines</strong>.  
+   The <strong>Books</strong> table has six columns: "id", "title", "authors", "published_date", "created_at", and "updated_at".</p>
+<p>The <strong>Magazines</strong> table has seven columns: "id", "title", "author", "published_date", "publisher", "created_at", "updated_at", and "book_id".  
+   There is a one-to-many relationship between Books and Magazines, meaning one book can have many magazines.</p>
 
 <h2>Data Sources</h2>
 
@@ -10,3 +12,24 @@
     <li><strong><%= source[:name] %>:</strong> <%= source[:description] %></li>
   <% end %>
 </ul>
+
+<h2>Dataset Description</h2>
+
+<p>In this project, we use two main datasets: <strong>Books</strong> and <strong>Magazines</strong>.</p>
+
+<h3>Books Dataset</h3>
+<ul>
+  <li><strong>Data Source:</strong> CSV file</li>
+  <li><strong>Structure:</strong> Each book contains an ID, title, authors, and published date.</li>
+  <li><strong>Storage:</strong> Data is read from a CSV file and stored in the <code>books</code> table.</li>
+</ul>
+
+<h3>Magazines Dataset</h3>
+<ul>
+  <li><strong>Data Source:</strong> Faker Gem (Randomly Generated Data)</li>
+  <li><strong>Structure:</strong> Each magazine has an ID, title, author, published date, publisher, and a reference to a book.</li>
+  <li><strong>Storage:</strong> Generated dynamically using Faker and stored in the <code>magazines</code> table.</li>
+</ul>
+
+<h3>Relationships</h3>
+<p>Each book can have <strong>up to 5 magazines</strong> linked to it. The <code>magazines</code> table has a foreign key <code>book_id</code> that establishes this relationship.</p>
