@@ -1,9 +1,19 @@
 <h1>About Us</h1>
 
-<p>In my database, I have two tables: <strong>Books</strong> and <strong>Magazines</strong>.  
-   The <strong>Books</strong> table has six columns: "id", "title", "authors", "published_date", "created_at", and "updated_at".</p>
-<p>The <strong>Magazines</strong> table has seven columns: "id", "title", "author", "published_date", "publisher", "created_at", "updated_at", and "book_id".  
-   There is a one-to-many relationship between Books and Magazines, meaning one book can have many magazines.</p>
+<p>In my database, I have several tables related to books and their associated data:</p>
+
+<h2>Books and Magazines</h2>
+<p>The <strong>Books</strong> table has six columns: "id", "title", "authors", "published_date", "created_at", and "updated_at".</p>
+<p>The <strong>Magazines</strong> table has eight columns: "id", "title", "author", "published_date", "publisher", "created_at", "updated_at", and "book_id". There is a one-to-many relationship between Books and Magazines, meaning one book can have many magazines.</p>
+
+<h2>Additional Models</h2>
+<p>We also have several other related models in the database:</p>
+<ul>
+  <li><strong>Authors:</strong> An author can have many books. Each book can have multiple authors.</li>
+  <li><strong>Categories:</strong> Each book belongs to a category, helping to classify books into genres.</li>
+  <li><strong>Publishers:</strong> Each book is published by a publisher, and the publisher can have many books.</li>
+  <li><strong>Reviews:</strong> Each book can have many reviews, provided by users, with ratings and comments.</li>
+</ul>
 
 <h2>Data Sources</h2>
 
@@ -15,13 +25,13 @@
 
 <h2>Dataset Description</h2>
 
-<p>In this project, we use two main datasets: <strong>Books</strong> and <strong>Magazines</strong>.</p>
+<p>In this project, we use multiple datasets for the various entities involved:</p>
 
 <h3>Books Dataset</h3>
 <ul>
   <li><strong>Data Source:</strong> CSV file</li>
-  <li><strong>Structure:</strong> Each book contains an ID, title, authors, and published date.</li>
-  <li><strong>Storage:</strong> Data is read from a CSV file and stored in the <code>books</code> table.</li>
+  <li><strong>Structure:</strong> Each book contains an ID, title, authors, and published date. The data is read from the CSV file and stored in the <code>books</code> table.</li>
+  <li><strong>Additional Relationships:</strong> A book can have many magazines and belongs to one category. A book also has many reviews and can have many authors.</li>
 </ul>
 
 <h3>Magazines Dataset</h3>
@@ -31,5 +41,42 @@
   <li><strong>Storage:</strong> Generated dynamically using Faker and stored in the <code>magazines</code> table.</li>
 </ul>
 
+<h3>Authors Dataset</h3>
+<ul>
+  <li><strong>Data Source:</strong> Faker Gem</li>
+  <li><strong>Structure:</strong> Each author has an ID, name, birth date, and biography.</li>
+  <li><strong>Storage:</strong> Data is generated dynamically and stored in the <code>authors</code> table.</li>
+</ul>
+
+<h3>Categories Dataset</h3>
+<ul>
+  <li><strong>Data Source:</strong> Faker Gem</li>
+  <li><strong>Structure:</strong> Each category has an ID, name, and description.</li>
+  <li><strong>Storage:</strong> Data is generated dynamically and stored in the <code>categories</code> table.</li>
+</ul>
+
+<h3>Publishers Dataset</h3>
+<ul>
+  <li><strong>Data Source:</strong> Faker Gem</li>
+  <li><strong>Structure:</strong> Each publisher has an ID, name, address, and contact information.</li>
+  <li><strong>Storage:</strong> Data is generated dynamically and stored in the <code>publishers</code> table.</li>
+</ul>
+
+<h3>Reviews Dataset</h3>
+<ul>
+  <li><strong>Data Source:</strong> Faker Gem</li>
+  <li><strong>Structure:</strong> Each review has an ID, rating, comment, and a reference to a book and a user.</li>
+  <li><strong>Storage:</strong> Generated dynamically and stored in the <code>reviews</code> table.</li>
+</ul>
+
 <h3>Relationships</h3>
-<p>Each book can have <strong>up to 5 magazines</strong> linked to it. The <code>magazines</code> table has a foreign key <code>book_id</code> that establishes this relationship.</p>
+<p>Below are the relationships between the models:</p>
+<ul>
+  <li><strong>Books and Magazines:</strong> A book can have many magazines. The <code>magazines</code> table has a foreign key <code>book_id</code> that establishes this relationship.</li>
+  <li><strong>Books and Authors:</strong> A book can have multiple authors, and an author can write many books. This is a many-to-many relationship.</li>
+  <li><strong>Books and Categories:</strong> Each book belongs to one category, and a category can have many books.</li>
+  <li><strong>Books and Publishers:</strong> Each book is published by one publisher, and a publisher can publish many books.</li>
+  <li><strong>Books and Reviews:</strong> Each book can have many reviews, and each review belongs to one book. Users can leave reviews for the books they read.</li>
+</ul>
+
+<p>With these relationships, the project models the structure of a complex book catalog system that can accommodate a variety of data for books, magazines, authors, and reviews.</p>
