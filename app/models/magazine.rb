@@ -1,7 +1,7 @@
 class Magazine < ApplicationRecord
     # Associations
     belongs_to :book
-    
+    has_many :reviews, dependent: :destroy
     # Validations
     validates :title, presence: true
     validates :author, presence: true
