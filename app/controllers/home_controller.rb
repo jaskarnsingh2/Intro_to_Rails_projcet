@@ -38,15 +38,21 @@ class HomeController < ApplicationController
   #   end
   # end
   def index
+    @magazines = Magazine.all
+    @books_with_magazines = Book.includes(:magazines)
+
     if params[:search].present?
-      @books_with_magazines = Book.includes(:magazines).where("books.title LIKE ?", "%#{params[:search]}%")
-      @magazines = Magazine.includes(:book).where("magazines.title LIKE ?", "%#{params[:search]}%")
-    else
-      @books_with_magazines = Book.includes(:magazines).all
-      @magazines = Magazine.all
+      @books_with_magazines = @books_with_magazines.where("books.title ILIKE ?", "%#{params[:search]}%")
     end
-  
+
+    if params[:magazine_id].present?
+      @books_with_magazines = @books_with_magazines.joins(:magazines).where(magazines: { id: params[:magazine_id] }).distinct
+    end
+
+    if @books_with_magazines.empty?
+      flash.now[:notice] = "Sorry, no results found."
+    end
+
     @books_with_magazines = @books_with_magazines.page(params[:page]).per(10)
   end
-  
 end

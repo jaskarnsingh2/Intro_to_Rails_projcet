@@ -10,6 +10,7 @@ gem 'mini_racer'
 
 # Adding css
 gem 'bootstrap', '~> 5.1.3'
+gem 'bcrypt', '~> 3.1.7'
 
 # Adding gem for pagination
 gem 'kaminari'
@@ -77,3 +78,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "devise", "~> 4.9"

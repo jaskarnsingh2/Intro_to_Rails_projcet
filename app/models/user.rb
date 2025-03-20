@@ -1,3 +1,6 @@
 class User < ApplicationRecord
-    has_many :reviews
-  end
+  # Include default devise modules
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+  has_many :reviews
+end

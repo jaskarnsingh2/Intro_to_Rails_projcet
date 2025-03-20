@@ -1,8 +1,10 @@
 <h1>Welcome to My Bookstore!</h1>
 
-<%= form_tag books_path, method: "get" do %>
+<%= form_tag root_path, method: "get" do %>
   <%= text_field_tag :search, params[:search], placeholder: "Search for books..." %>
+
   <%= select_tag :magazine_id, options_for_select(@magazines.map { |m| [m.title, m.id] }, params[:magazine_id]), include_blank: "Select magazine" %>
+
   <%= submit_tag "Search" %>
 <% end %>
 
