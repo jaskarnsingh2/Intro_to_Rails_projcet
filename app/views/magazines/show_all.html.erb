@@ -17,7 +17,7 @@
   <tbody>
     <% @magazines.each do |magazine| %>
       <tr>
-        <td><%= magazine.title %></td>
+        <td><%= link_to magazine.title, magazine_path(magazine) %></td>
         <td><%= magazine.author %></td>
         <td><%= magazine.published_date %></td>
         <td><%= magazine.publisher %></td>

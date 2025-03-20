@@ -1,10 +1,10 @@
 <h1>Welcome to My Bookstore!</h1>
 
-<%= form_tag(root_path, method: "get") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search for books..." %>
-    <%= select_tag :magazine_id, options_for_select(@magazines.map{ |m| [m.title, m.id] }), include_blank: "Select magazine" %>
-    <%= submit_tag "Search" %>
-  <% end %>
+<%= form_tag books_path, method: "get" do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search for books..." %>
+  <%= select_tag :magazine_id, options_for_select(@magazines.map { |m| [m.title, m.id] }, params[:magazine_id]), include_blank: "Select magazine" %>
+  <%= submit_tag "Search" %>
+<% end %>
 
 <table>
   <thead>
@@ -17,12 +17,12 @@
   <tbody>
     <% @books_with_magazines.each do |book| %>
       <tr>
-      <td><%= link_to book.title, book_path(book) %></td>
-        <td><%= book.authors %></td>
+        <td><%= link_to book.title, book_path(book) %></td>
+        <td><%= book.authors.map(&:name).join(", ") %></td>
         <td>
           <ul>
             <% book.magazines.each do |magazine| %>
-              <li><%= magazine.title %></li>
+              <li><%= link_to magazine.title, magazine_path(magazine) %></li>
             <% end %>
           </ul>
         </td>

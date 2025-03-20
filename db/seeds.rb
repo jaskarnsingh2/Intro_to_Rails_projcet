@@ -13,13 +13,23 @@ CSV.foreach(Rails.root.join('db', 'books.csv'), headers: true) do |row|
     parsed_date = nil  # If date is invalid, set to nil
   end
 
-  # Create the book record with parsed date
-  Book.create!(
-    title: row['Title'],
-    authors: row['Author(s)'],
-    published_date: parsed_date,
-    publisher: row['Publisher']
-  )
+  # Check if author(s) is present
+  if row['Author(s)'].present?
+    # Create authors first
+    authors = row['Author(s)'].split(',').map do |author_name|
+      Author.find_or_create_by(name: author_name.strip)
+    end
+
+    # Now create the book with associated authors
+    book = Book.create!(
+      title: row['Title'],
+      published_date: parsed_date,
+      publisher: row['Publisher'],
+      authors: authors  # Assign authors at creation
+    )
+  else
+    puts "Skipping book with no authors: #{row['Title']}"
+  end
 end
 
 # Seed data from Faker for Magazines
@@ -28,7 +38,6 @@ Book.all.each do |book|
     Magazine.create!(
       title: Faker::Book.title,
       author: Faker::Book.author,
-      # Random date within the last 5 years
       published_date: Faker::Date.backward(days: 365 * 5), 
       publisher: Faker::Book.publisher,
       book: book
