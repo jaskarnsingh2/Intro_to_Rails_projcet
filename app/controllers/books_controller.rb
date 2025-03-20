@@ -19,4 +19,11 @@ end
   def show
     @book = Book.includes(:magazines).find(params[:id])
   end
+  def show
+    @book = Book.find(params[:id])
+    # Now you have access to associated publisher, reviews, and category
+    @publisher = @book.publisher
+    @reviews = @book.reviews
+    @category = @book.category
+  end
 end
