@@ -1,8 +1,8 @@
-<h1>All Books</h1>
+<h1>Books</h1>
 
-<%= form_with(url: books_path, method: "get") do %>
-  <%= text_field_tag(:search, params[:search], placeholder: "Search for books") %>
-  <%= submit_tag("Search") %>
+<%= form_with(url: books_path, method: "get", local: true) do %>
+  <%= text_field_tag :query, params[:query], placeholder: "Search books by title" %>
+  <%= submit_tag "Search" %>
 <% end %>
 
 <table>
@@ -14,20 +14,19 @@
     </tr>
   </thead>
   <tbody>
+  <% if @books.present? %>
     <% @books.each do |book| %>
       <tr>
-        <td><%= link_to book.title, book_path(book) %></td> <!-- Make title clickable -->
-        <td><%= book.authors.map(&:name).join(", ") %></td> <!-- Display author names -->
-        <td><%= book.published_date %></td>
+        <td><%= link_to book.title, book_path(book) %></td>
+        <td><%= book.authors %></td>
       </tr>
     <% end %>
-  </tbody>
+  <% else %>
+    <tr>
+      <td colspan="2">No books available</td>
+    </tr>
+  <% end %>
+</tbody>
 </table>
 
-<% if flash[:notice] %>
-  <div class="alert alert-warning">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
-<%= paginate @books %>
+<%= paginate @books %> <!-- If using pagination -->
