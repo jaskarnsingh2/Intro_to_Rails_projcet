@@ -2,7 +2,7 @@
 
 <p><strong>Authors:</strong> <%= @book.authors.map(&:name).join(", ") %></p>
 <p><strong>Published Date:</strong> <%= @book.published_date %></p>
-<p><strong>Publisher:</strong> <%= @book.publisher.name %></p> <!-- Assuming publisher is associated with a name attribute -->
+<p><strong>Publisher:</strong> <%= @book.publisher&.name || "No Publisher" %></p>
 
 <h2>Magazines</h2>
 <ul>

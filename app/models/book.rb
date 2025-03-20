@@ -4,7 +4,7 @@ class Book < ApplicationRecord
     has_and_belongs_to_many :authors
     belongs_to :category
     has_many :reviews
-    belongs_to :publisher
+    belongs_to :publisher, optional: true
     # Validations
     validates :title, presence: true
     validates :authors, presence: true

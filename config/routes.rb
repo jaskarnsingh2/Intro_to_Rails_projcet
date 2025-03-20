@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :publishers, only: [:index, :show]
 
   resources :books, only: [:show] do
+    resources :reviews, only: [:create]
     resources :magazines, only: [:show], controller: 'books/magazines'
   end
 
